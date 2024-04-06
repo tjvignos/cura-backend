@@ -1,0 +1,1 @@
+web gunicorn cura_backend.wsgi:application --log-file -
