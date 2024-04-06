@@ -7,6 +7,7 @@ click==8.0.3
 dj-database-url==2.1.0
 Django==4.0
 django-heroku==0.3.1
+django_heroku==0.3.1
 djangorestframework==3.13.1
 google-api-core==2.3.2
 google-api-python-client==2.33.0
