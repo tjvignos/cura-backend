@@ -15,4 +15,5 @@ prompt = views.PromptViewSet.as_view({
 urlpatterns = [
   path('', prompt_list, name='prompt-list'),
   path('<int:pk>/', prompt, name='prompt'),
+  path('current/', views.current_prompt, name='current-prompt')
 ]

@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
 from checkin.models import Checkin
+from rest_framework.decorators import api_view
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 class PromptViewSet(viewsets.ModelViewSet):
   queryset = Prompt.objects.all().order_by('text')
@@ -44,3 +47,10 @@ class PromptViewSet(viewsets.ModelViewSet):
     instance = self.get_object()
     instance.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+  
+@api_view(['GET'])
+def current_prompt():
+  today = datetime.now(ZoneInfo("America/New_York")).date()
+  prompt = Prompt.objects.get(date=today)
+  serializer = PromptSerializer(prompt)
+  return Response(serializer.data)
