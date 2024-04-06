@@ -49,8 +49,10 @@ class PromptViewSet(viewsets.ModelViewSet):
     return Response(status=status.HTTP_204_NO_CONTENT)
   
 @api_view(['GET'])
-def current_prompt():
+def current_prompt(request):
   today = datetime.now(ZoneInfo("America/New_York")).date()
   prompt = Prompt.objects.get(date=today)
+  if prompt is None:
+    return Response(status=status.HTTP_404_NOT_FOUND)
   serializer = PromptSerializer(prompt)
   return Response(serializer.data)
